@@ -1,5 +1,7 @@
 ## Proof API
 
+<a href="https://travis-ci.org/cnvs/canvas"><img src="https://travis-ci.org/austintoddj/proof.svg?branch=master" alt="Build Status"></a>
+
 Proof is a simple REST API that [August Ash](https://www.augustash.com) uses to power a code challenge for prospective employees. During the interview process, we may ask developers to build a sample application that will consume the Proof API.
 
 ### Challenge Description
