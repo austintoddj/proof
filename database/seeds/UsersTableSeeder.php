@@ -18,28 +18,28 @@ class UsersTableSeeder extends Seeder
             'name' => 'Todd Austin',
             'email' => 'austin.todd.j@gmail.com',
             'password' => bcrypt('password'),
-            'remember_token' => str_random(10)
+            'remember_token' => str_random(10),
         ]);
 
         User::create([
             'name' => 'Peter McWilliams',
             'email' => 'pmcwilliams@augustash.com',
             'password' => bcrypt('password'),
-            'remember_token' => str_random(10)
+            'remember_token' => str_random(10),
         ]);
 
         User::create([
             'name' => 'Lynn Winter',
             'email' => 'lwinter@augustash.com',
             'password' => bcrypt('password'),
-            'remember_token' => str_random(10)
+            'remember_token' => str_random(10),
         ]);
 
         User::create([
             'name' => 'Cyle Carlson',
             'email' => 'ccarlson@augustash.com',
             'password' => bcrypt('password'),
-            'remember_token' => str_random(10)
+            'remember_token' => str_random(10),
         ]);
     }
 }
