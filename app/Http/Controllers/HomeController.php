@@ -23,7 +23,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-//        $client = new Client([
+        //        $client = new Client([
 //            'base_uri' => 'https://proofapi.herokuapp.com'
 //        ]);
 //
