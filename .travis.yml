@@ -10,6 +10,9 @@ before_install:
   - mv .env.example .env
   - travis_retry composer self-update
 
+before_script:
+  - php artisan key:generate
+
 install:
   - composer install
 
