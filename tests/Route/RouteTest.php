@@ -45,4 +45,28 @@ class RouteTest extends TestCase
         $this->seeIsAuthenticated();
         $this->assertEquals(200, $response->status());
     }
+
+    /** @test */
+    public function it_can_access_the_trending_page()
+    {
+        $response = $this->actingAs($this->user)->call('GET', route('trending'));
+        $this->seeIsAuthenticated();
+        $this->assertEquals(200, $response->status());
+    }
+
+    /** @test */
+    public function it_can_access_the_submit_page()
+    {
+        $response = $this->actingAs($this->user)->call('GET', route('submit'));
+        $this->seeIsAuthenticated();
+        $this->assertEquals(200, $response->status());
+    }
+
+    /** @test */
+    public function it_receives_a_404_error_for_a_page_not_found()
+    {
+        $response = $this->actingAs($this->user)->call('GET', url('nothing-to-see-here'));
+        $this->seeIsAuthenticated();
+        $this->assertEquals(404, $response->status());
+    }
 }
