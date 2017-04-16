@@ -36,7 +36,7 @@
                     </button>
 
                     <!-- Branding Image -->
-                    <a class="navbar-brand" href="{{ route('dashboard') }}">
+                    <a class="navbar-brand" @if (Auth::check()) href="{{ route('dashboard') }}" @else href="{{ url('/') }}" @endif>
                         {{ config('app.name') }}
                     </a>
                 </div>
