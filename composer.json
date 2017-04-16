@@ -25,7 +25,8 @@
     },
     "autoload-dev": {
         "classmap": [
-            "tests/CreatesUser.php"
+            "tests/CreatesUser.php",
+            "tests/InteractsWithDatabase.php"
         ],
         "psr-4": {
             "Tests\\": "tests/"

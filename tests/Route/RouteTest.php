@@ -2,11 +2,13 @@
 
 namespace Tests\Route;
 
+use CreatesUser;
 use Tests\TestCase;
+use InteractsWithDatabase;
 
 class RouteTest extends TestCase
 {
-    use \CreatesUser;
+    use CreatesUser, InteractsWithDatabase;
 
     /** @test */
     public function it_can_access_the_welcome_page()

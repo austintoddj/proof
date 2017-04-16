@@ -12,7 +12,6 @@ before_install:
 
 before_script:
   - php artisan key:generate
-  - php artisan migrate --seed
 
 install:
   - composer install
