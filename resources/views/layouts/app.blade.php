@@ -55,8 +55,8 @@
                             <li><a href="{{ route('register') }}">Register</a></li>
                         @else
                             <li @if (Route::is('dashboard')) class="active" @endif><a href="{{ route('dashboard') }}"><i class="fa fa-fw fa-tachometer"></i> Dashboard</a></li>
-                            <li><a href="{{ route('trending') }}"><i class="fa fa-fw fa-line-chart"></i> Trending</a></li>
-                            <li><a href="#"><i class="fa fa-fw fa-paper-plane"></i> Submit</a></li>
+                            <li @if (Route::is('trending')) class="active" @endif><a href="{{ route('trending') }}"><i class="fa fa-fw fa-line-chart"></i> Trending</a></li>
+                            <li @if (Route::is('submit')) class="active" @endif><a href="{{ route('submit') }}"><i class="fa fa-fw fa-paper-plane"></i> Submit</a></li>
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                                     <i class="fa fa-fw fa-user-circle"></i> {{ Auth::user()->name }} <span class="caret"></span>
@@ -87,5 +87,10 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
+    <script>
+        $(document).ready(function(){
+            $('[data-toggle="tooltip"]').tooltip();
+        });
+    </script>
 </body>
 </html>

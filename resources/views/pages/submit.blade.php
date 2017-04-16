@@ -5,10 +5,10 @@
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <div class="panel panel-default">
-                    <div class="panel-heading">What's Trending Today!</div>
+                    <div class="panel-heading">Submit a New Link</div>
 
                     <div class="panel-body">
-                        <p>Look at all the trending videos!</p>
+                        <p>Submit a new link here!</p>
                     </div>
                 </div>
             </div>

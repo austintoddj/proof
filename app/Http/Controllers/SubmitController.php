@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-class TrendingController extends Controller
+class SubmitController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -21,6 +21,6 @@ class TrendingController extends Controller
      */
     public function index()
     {
-        return view('pages.trending');
+        return view('pages.submit');
     }
 }
