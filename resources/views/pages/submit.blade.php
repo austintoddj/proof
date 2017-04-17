@@ -5,10 +5,10 @@
         <div class="row">
             <div class="col-md-10 col-md-offset-1">
                 <div class="panel panel-default">
-                    <div class="panel-heading">Submit a New Link</div>
+                    <div class="panel-heading">Submit</div>
 
                     <div class="panel-body">
-                        <p>Submit a new link here!</p>
+                        <p><i class="fa fa-fw fa-check-square-o"></i> Form to submit a new link here</p>
                     </div>
                 </div>
             </div>

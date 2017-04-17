@@ -68,6 +68,6 @@ class HomeController extends Controller
 //            ]
 //        ]);
 //        dd($response);
-        return view('pages.dashboard');
+        return view('pages.home');
     }
 }
