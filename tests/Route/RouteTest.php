@@ -28,7 +28,7 @@ class RouteTest extends TestCase
     public function it_can_access_the_register_page()
     {
         $response = $this->call('GET', route('register'));
-        $this->assertEquals(200, $response->status());
+        $this->assertEquals(302, $response->status());
     }
 
     /** @test */

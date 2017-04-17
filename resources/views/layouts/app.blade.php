@@ -50,10 +50,7 @@
                     <!-- Right Side Of Navbar -->
                     <ul class="nav navbar-nav navbar-right">
                         <!-- Authentication Links -->
-                        @if (Auth::guest())
-                            <li><a href="{{ route('login') }}">Login</a></li>
-                            <li><a href="{{ route('register') }}">Register</a></li>
-                        @else
+                        @if (!Auth::guest())
                             <li @if (Route::is('home')) class="active" @endif><a href="{{ route('home') }}"><i class="fa fa-fw fa-home"></i> Home</a></li>
                             <li @if (Route::is('videos')) class="active" @endif><a href="{{ route('videos') }}"><i class="fa fa-fw fa-youtube-play"></i> Videos</a></li>
                             <li @if (Route::is('submit')) class="active" @endif><a href="{{ route('submit') }}"><i class="fa fa-fw fa-paper-plane"></i> Submit</a></li>
@@ -65,7 +62,7 @@
                                 <ul class="dropdown-menu" role="menu">
                                     <li>
                                         <a href="{{ route('logout') }}"
-                                            onclick="event.preventDefault();
+                                           onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                             Logout
                                         </a>

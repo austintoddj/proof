@@ -66,24 +66,13 @@
     </head>
     <body>
         <div class="flex-center position-ref full-height">
-            @if (Route::has('login'))
-                <div class="top-right links">
-                    @if (Auth::check())
-                        <a href="{{ route('dashboard') }}">Dashboard</a>
-                    @else
-                        <a href="{{ route('login') }}">Login</a>
-                        <a href="{{ route('register') }}">Register</a>
-                    @endif
-                </div>
-            @endif
-
             <div class="content">
                 <div class="title m-b-md">
                     {{ config('app.name') }}
                 </div>
 
                 <div class="links">
-                    <a href="http://docs.proofapi.apiary.io" target="_blank">Documentation</a>
+                    <a href="{{ route('login') }}">Login</a>
                     <a href="https://github.com/austintoddj/proof" target="_blank">GitHub</a>
                     <a href="https://travis-ci.org/austintoddj/proof" target="_blank">TravisCI</a>
                     <a href="https://styleci.io/repos/88316171" target="_blank">StyleCI</a>
