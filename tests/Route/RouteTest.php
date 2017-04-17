@@ -25,7 +25,7 @@ class RouteTest extends TestCase
     }
 
     /** @test */
-    public function it_can_access_the_register_page()
+    public function it_reroutes_registration_requests_to_the_home_page()
     {
         $response = $this->call('GET', route('register'));
         $this->assertEquals(302, $response->status());
