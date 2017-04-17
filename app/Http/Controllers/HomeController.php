@@ -2,9 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use GuzzleHttp\Client;
-use GuzzleHttp\Exception\GuzzleException;
-
 class HomeController extends Controller
 {
     /**
@@ -26,13 +23,13 @@ class HomeController extends Controller
     {
         $ch = curl_init();
 
-        curl_setopt($ch, CURLOPT_URL, "https://proofapi.herokuapp.com/sessions");
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
-        curl_setopt($ch, CURLOPT_HEADER, FALSE);
-        curl_setopt($ch, CURLOPT_POST, TRUE);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, "{\"email\": \"austin.todd.j@gmail.com\",\"password\": \"shrew,spillet,series\"}");
+        curl_setopt($ch, CURLOPT_URL, 'https://proofapi.herokuapp.com/sessions');
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_HEADER, false);
+        curl_setopt($ch, CURLOPT_POST, true);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, '{"email": "austin.todd.j@gmail.com","password": "shrew,spillet,series"}');
         curl_setopt($ch, CURLOPT_HTTPHEADER, [
-            "Content-Type: application/json"
+            'Content-Type: application/json',
         ]);
 
         $response = curl_exec($ch);
