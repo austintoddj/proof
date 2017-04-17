@@ -2,7 +2,7 @@
 
 /*
 |--------------------------------------------------------------------------
-| Web Routes
+| Web Route
 |--------------------------------------------------------------------------
 |
 | Here is where you can register web routes for your application. These
@@ -12,5 +12,11 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('pages.welcome');
 });
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('dashboard');
+Route::get('/trending', 'TrendingController@index')->name('trending');
+Route::get('/submit', 'SubmitController@index')->name('submit');
