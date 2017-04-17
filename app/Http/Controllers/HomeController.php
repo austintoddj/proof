@@ -2,9 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use GuzzleHttp\Client;
-use GuzzleHttp\Exception\GuzzleException;
-
 class HomeController extends Controller
 {
     /**
