@@ -9,6 +9,7 @@
 
                 <div class="panel-body">
                     <p><i class="fa fa-fw fa-check-square-o"></i> Display 10 Ten Trending Videos by Votes/Views</p>
+                    <pre>{{ var_dump($data) }}</pre>
                 </div>
             </div>
         </div>
