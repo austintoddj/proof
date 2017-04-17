@@ -18,7 +18,7 @@ Route::get('/', function () {
 Auth::routes();
 
 // Re-route registration requests to the home page
-Route::any('/register','HomeController@index');
+Route::any('/register', 'HomeController@index');
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/videos', 'VideosController@index')->name('videos');
