@@ -29,7 +29,7 @@ class VerifyApiAuthToken
                 'password' => env('API_PASSWORD'),
             ]));
             curl_setopt($ch, CURLOPT_HTTPHEADER, [
-                'Content-Type: application/json',
+                'Content-Type: '.env('API_CONTENT_TYPE'),
             ]);
 
             $response = curl_exec($ch);
