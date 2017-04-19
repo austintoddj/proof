@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Video;
+
 class VideosController extends Controller
 {
     /**
@@ -21,6 +23,8 @@ class VideosController extends Controller
      */
     public function index()
     {
-        return view('pages.videos');
+        $data = Video::getAllVideos('/videos?1&10');
+
+        return view('pages.videos', compact('data'));
     }
 }
