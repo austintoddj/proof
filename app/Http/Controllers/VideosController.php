@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Base;
 use App\Models\Video;
 
 class VideosController extends Controller
