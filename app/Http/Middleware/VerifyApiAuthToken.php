@@ -15,7 +15,7 @@ class VerifyApiAuthToken
      */
     public function handle($request, Closure $next)
     {
-        if (!empty(Session('auth_token'))) {
+        if (! empty(Session('auth_token'))) {
             return $next($request);
         } else {
             $ch = curl_init();
@@ -26,7 +26,7 @@ class VerifyApiAuthToken
             curl_setopt($ch, CURLOPT_POST, true);
             curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode([
                 'email' => env('API_USERNAME'),
-                'password' => env('API_PASSWORD')
+                'password' => env('API_PASSWORD'),
             ]));
             curl_setopt($ch, CURLOPT_HTTPHEADER, [
                 'Content-Type: application/json',

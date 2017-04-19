@@ -16,15 +16,15 @@ class Base
         $ch = curl_init();
 
         curl_setopt($ch, CURLOPT_URL, env('API_BASE_URL').$urlSegment);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
-        curl_setopt($ch, CURLOPT_HEADER, FALSE);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_HEADER, false);
         curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode([
             'email' => env('API_USERNAME'),
-            'password' => env('API_PASSWORD')
+            'password' => env('API_PASSWORD'),
         ]));
         curl_setopt($ch, CURLOPT_HTTPHEADER, [
             'Content-Type: '.env('API_CONTENT_TYPE'),
-            'X-Auth-Token: '.Session('auth_token')
+            'X-Auth-Token: '.Session('auth_token'),
         ]);
 
         $response = curl_exec($ch);
