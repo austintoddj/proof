@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
-class TrendingController extends Controller
+use App\Models\Video;
+
+class VideosController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -21,6 +23,8 @@ class TrendingController extends Controller
      */
     public function index()
     {
-        return view('pages.trending');
+        $data = Video::getAllVideos('/videos?1&10');
+
+        return view('pages.videos', compact('data'));
     }
 }

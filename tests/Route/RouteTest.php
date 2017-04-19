@@ -25,10 +25,10 @@ class RouteTest extends TestCase
     }
 
     /** @test */
-    public function it_can_access_the_register_page()
+    public function it_reroutes_registration_requests_to_the_home_page()
     {
         $response = $this->call('GET', route('register'));
-        $this->assertEquals(200, $response->status());
+        $this->assertEquals(302, $response->status());
     }
 
     /** @test */
@@ -39,17 +39,17 @@ class RouteTest extends TestCase
     }
 
     /** @test */
-    public function it_can_access_the_dashboard_page()
+    public function it_can_access_the_home_page()
     {
-        $response = $this->actingAs($this->user)->call('GET', route('dashboard'));
+        $response = $this->actingAs($this->user)->call('GET', route('home'));
         $this->seeIsAuthenticated();
         $this->assertEquals(200, $response->status());
     }
 
     /** @test */
-    public function it_can_access_the_trending_page()
+    public function it_can_access_the_videos_page()
     {
-        $response = $this->actingAs($this->user)->call('GET', route('trending'));
+        $response = $this->actingAs($this->user)->call('GET', route('videos'));
         $this->seeIsAuthenticated();
         $this->assertEquals(200, $response->status());
     }
