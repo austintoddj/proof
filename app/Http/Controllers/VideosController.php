@@ -25,6 +25,6 @@ class VideosController extends Controller
     {
         $data = Video::getAllVideos('/videos');
 
-        return view('pages.videos', ['data' => $data]);
+        return view('pages.videos', ['data' => json_decode($data)]);
     }
 }

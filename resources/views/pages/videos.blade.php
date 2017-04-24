@@ -8,10 +8,10 @@
                     <div class="panel-heading">Videos</div>
 
                     <div class="panel-body">
-                        <p><i class="fa fa-fw fa-check-square-o"></i> Display all videos here</p>
-                        <div class="well">
-                            {{ $data }}
-                        </div>
+                        @foreach($data->data as $video)
+                            <a href="{{ $video->attributes->url }}" target="_blank"><h4><i class="fa fa-fw fa-youtube-play"></i> {{ $video->attributes->title }}</h4></a>
+                            <hr>
+                        @endforeach
                     </div>
                 </div>
             </div>
