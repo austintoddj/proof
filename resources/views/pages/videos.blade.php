@@ -10,7 +10,7 @@
                     <div class="panel-body">
                         <p><i class="fa fa-fw fa-check-square-o"></i> Display all videos here</p>
                         <div class="well">
-                            {{ var_dump($data) }}
+                            {{ $data }}
                         </div>
                     </div>
                 </div>

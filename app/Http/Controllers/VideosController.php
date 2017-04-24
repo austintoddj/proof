@@ -23,8 +23,8 @@ class VideosController extends Controller
      */
     public function index()
     {
-        $data = Video::getAllVideos('/videos?1&10');
+        $data = Video::getAllVideos('/videos');
 
-        return view('pages.videos', compact('data'));
+        return view('pages.videos', ['data' => $data]);
     }
 }
