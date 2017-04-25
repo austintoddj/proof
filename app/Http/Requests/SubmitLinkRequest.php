@@ -27,8 +27,8 @@ class SubmitLinkRequest extends FormRequest
         return [
             'link' => [
                 'url',
-                'not_in:' . implode(',', Video::getAllVideoUrls('/videos'))
-            ]
+                'not_in:'.implode(',', Video::getAllVideoUrls('/videos')),
+            ],
         ];
     }
 
@@ -41,7 +41,7 @@ class SubmitLinkRequest extends FormRequest
     {
         return [
             'link.url' => 'The link must be a standard URL',
-            'link.not_in' => 'That link has already been submitted'
+            'link.not_in' => 'That link has already been submitted',
         ];
     }
 }
