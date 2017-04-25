@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use Illuminate\Support\Facades\Cache;
+
 class Video extends Base
 {
     /**
@@ -47,8 +49,17 @@ class Video extends Base
     public static function getTrendingVideosByViews($endpoint)
     {
         $data = parent::get($endpoint);
+        $cachedContent = Cache::get('trendingVideosByViews');
 
-        return $data;
+        if ($cachedContent) {
+            return $cachedContent;
+        } else {
+            $newCache = Cache::remember('trendingVideosByViews', 5, function() use(&$data) {
+                // TODO: Cache ONLY the top 10 videos by views (Currently caching everything)
+                return json_decode($data)->data;
+            });
+            return $newCache;
+        }
     }
 
     /**
@@ -61,7 +72,16 @@ class Video extends Base
     public static function getTrendingVideosByVotes($endpoint)
     {
         $data = parent::get($endpoint);
+        $cachedContent = Cache::get('trendingVideosByVotes');
 
-        return $data;
+        if ($cachedContent) {
+            return $cachedContent;
+        } else {
+            $newCache = Cache::remember('trendingVideosByVotes', 5, function() use(&$data) {
+                // TODO: Cache ONLY the top 10 videos by votes (Currently caching everything)
+                return json_decode($data)->data;
+            });
+            return $newCache;
+        }
     }
 }

@@ -44,7 +44,9 @@
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">
                     <!-- Left Side Of Navbar -->
                     <ul class="nav navbar-nav">
-                        &nbsp;
+                        @if (!Auth::guest())
+                        &nbsp;  <li><a><span class="label label-default"><i class="fa fa-fw fa-check"></i> Votes left: {{ \App\Models\Vote::votesLeft() }}</span></a></li>
+                        @endif
                     </ul>
 
                     <!-- Right Side Of Navbar -->

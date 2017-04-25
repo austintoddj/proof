@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Video;
+use Illuminate\Support\Facades\Cache;
 
 class HomeController extends Controller
 {

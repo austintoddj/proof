@@ -11,4 +11,9 @@ class Constants
         'Saturday',
         'Sunday',
     ];
+
+    /**
+     * @constant(VOTES)
+     */
+    const VOTES = 1;
 }

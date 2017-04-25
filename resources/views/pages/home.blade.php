@@ -11,12 +11,26 @@
                     <div class="col-md-6">
                         <h3>Top 10 by Views</h3>
                         <hr>
-                        {{ var_dump($trendingVideosByViews) }}
+                        @foreach($trendingVideosByViews as $video)
+                            <p><a href="{{ $video->attributes->url }}" target="_blank"> {{ $video->attributes->title }}</a> <span class="text-muted small">({{ $video->attributes->view_tally . ' ' . str_plural('view', $video->attributes->view_tally) }})</span></p>
+                            <p>
+                                <a href="#" class="btn btn-default btn-xs" @if(\App\Models\Vote::votesLeft() == 0) disabled @endif><i class="fa fa-fw fa-thumbs-up"></i> Upvote</a>
+                                <a href="#" class="btn btn-default btn-xs" @if(\App\Models\Vote::votesLeft() == 0) disabled @endif><i class="fa fa-fw fa-thumbs-down"></i> Downvote</a>
+                            </p>
+                            <hr>
+                        @endforeach
                     </div>
                     <div class="col-md-6">
                         <h3>Top 10 by Votes</h3>
                         <hr>
-                        {{ var_dump($trendingVideosByVotes) }}
+                        @foreach($trendingVideosByVotes as $video)
+                            <p><a href="{{ $video->attributes->url }}" target="_blank"> {{ $video->attributes->title }}</a> <span class="text-muted small">({{ $video->attributes->vote_tally . ' ' . str_plural('vote', $video->attributes->vote_tally) }})</span></p>
+                            <p>
+                                <a href="#" class="btn btn-default btn-xs" @if(\App\Models\Vote::votesLeft() == 0) disabled @endif><i class="fa fa-fw fa-thumbs-up"></i> Upvote</a>
+                                <a href="#" class="btn btn-default btn-xs" @if(\App\Models\Vote::votesLeft() == 0) disabled @endif><i class="fa fa-fw fa-thumbs-down"></i> Downvote</a>
+                            </p>
+                            <hr>
+                        @endforeach
                     </div>
                 </div>
             </div>
