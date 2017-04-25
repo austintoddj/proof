@@ -7,15 +7,15 @@ class Base
     /**
      * Call a GET request on the API.
      *
-     * @param string $urlSegment
+     * @param string $endpoint
      *
      * @return object $response
      */
-    public static function get($urlSegment)
+    public static function get($endpoint)
     {
         $ch = curl_init();
 
-        curl_setopt($ch, CURLOPT_URL, env('API_BASE_URL').$urlSegment);
+        curl_setopt($ch, CURLOPT_URL, env('API_BASE_URL').$endpoint);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_HEADER, false);
         curl_setopt($ch, CURLOPT_HTTPHEADER, [

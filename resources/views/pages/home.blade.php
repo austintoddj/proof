@@ -8,7 +8,14 @@
                 <div class="panel-heading">Trending Now</div>
 
                 <div class="panel-body">
-                    <p><i class="fa fa-fw fa-check-square-o"></i> Display 10 Ten Trending Videos by Votes/Views</p>
+                    <div class="col-md-6">
+                        <h3>Top Videos by Views</h3>
+                        {{ var_dump($trendingVideosByViews) }}
+                    </div>
+                    <div class="col-md-6">
+                        <h3>Top Videos by Votes</h3>
+                        {{ var_dump($trendingVideosByVotes) }}
+                    </div>
                 </div>
             </div>
         </div>
