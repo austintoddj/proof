@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Models\Video;
 use Illuminate\Foundation\Http\FormRequest;
 
 class SubmitLinkRequest extends FormRequest
@@ -24,7 +25,10 @@ class SubmitLinkRequest extends FormRequest
     public function rules()
     {
         return [
-            'link' => 'url',
+            'link' => [
+                'url',
+                'not_in:' . implode(',', Video::getAllVideoUrls('/videos'))
+            ]
         ];
     }
 
@@ -37,6 +41,7 @@ class SubmitLinkRequest extends FormRequest
     {
         return [
             'link.url' => 'The link must be a standard URL',
+            'link.not_in' => 'That link has already been submitted'
         ];
     }
 }

@@ -18,11 +18,23 @@ class Video extends Base
         return $data;
     }
 
+    /**
+     * Retrieve all video URLs from the API.
+     *
+     * @param string $endpoint
+     *
+     * @return array $urls
+     */
     public static function getAllVideoUrls($endpoint)
     {
+        $urls = [];
         $data = parent::get($endpoint);
 
-        return $data;
+        foreach (json_decode($data)->data as $video) {
+            array_push($urls, $video->attributes->url);
+        }
+
+        return $urls;
     }
 
     /**
