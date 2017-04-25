@@ -30,7 +30,6 @@ class SubmitController extends Controller
      * Submit a valid URL to the API.
      *
      * @param SubmitLinkRequest $request
-     *
      */
     public function post(SubmitLinkRequest $request)
     {

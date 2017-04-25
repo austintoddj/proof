@@ -2,7 +2,6 @@
 
 namespace App\Meta;
 
-
 class Constants
 {
     /**
@@ -10,6 +9,6 @@ class Constants
      */
     const WEEKEND = [
         'Saturday',
-        'Sunday'
+        'Sunday',
     ];
 }
