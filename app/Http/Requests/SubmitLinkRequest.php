@@ -24,7 +24,7 @@ class SubmitLinkRequest extends FormRequest
     public function rules()
     {
         return [
-            'link' => 'url'
+            'link' => 'url',
         ];
     }
 
@@ -36,7 +36,7 @@ class SubmitLinkRequest extends FormRequest
     public function messages()
     {
         return [
-            'link.url' => 'The link must be a standard URL'
+            'link.url' => 'The link must be a standard URL',
         ];
     }
 }
