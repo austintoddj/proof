@@ -54,10 +54,11 @@ class Video extends Base
         if ($cachedContent) {
             return $cachedContent;
         } else {
-            $newCache = Cache::remember('trendingVideosByViews', 5, function() use(&$data) {
+            $newCache = Cache::remember('trendingVideosByViews', 5, function () use (&$data) {
                 // TODO: Cache ONLY the top 10 videos by views (Currently caching everything)
                 return json_decode($data)->data;
             });
+
             return $newCache;
         }
     }
@@ -77,10 +78,11 @@ class Video extends Base
         if ($cachedContent) {
             return $cachedContent;
         } else {
-            $newCache = Cache::remember('trendingVideosByVotes', 5, function() use(&$data) {
+            $newCache = Cache::remember('trendingVideosByVotes', 5, function () use (&$data) {
                 // TODO: Cache ONLY the top 10 videos by votes (Currently caching everything)
                 return json_decode($data)->data;
             });
+
             return $newCache;
         }
     }
