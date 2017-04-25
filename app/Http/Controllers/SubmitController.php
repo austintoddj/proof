@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\SubmitLinkRequest;
+
 class SubmitController extends Controller
 {
     /**
@@ -22,5 +24,15 @@ class SubmitController extends Controller
     public function index()
     {
         return view('pages.submit');
+    }
+
+    /**
+     * Submit a valid URL to the API.
+     *
+     * @param SubmitLinkRequest $request
+     */
+    public function post(SubmitLinkRequest $request)
+    {
+        dd($request);
     }
 }

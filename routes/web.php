@@ -23,3 +23,4 @@ Route::any('/register', 'HomeController@index');
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/videos', 'VideosController@index')->name('videos');
 Route::get('/submit', 'SubmitController@index')->name('submit');
+Route::post('/submit', 'SubmitController@post');

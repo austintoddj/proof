@@ -7,21 +7,17 @@ class Base
     /**
      * Call a GET request on the API.
      *
-     * @param string $urlSegment
+     * @param string $endpoint
      *
-     * @return void
+     * @return object $response
      */
-    public static function get($urlSegment)
+    public static function get($endpoint)
     {
         $ch = curl_init();
 
-        curl_setopt($ch, CURLOPT_URL, env('API_BASE_URL').$urlSegment);
+        curl_setopt($ch, CURLOPT_URL, env('API_BASE_URL').$endpoint);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_HEADER, false);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode([
-            'email' => env('API_USERNAME'),
-            'password' => env('API_PASSWORD'),
-        ]));
         curl_setopt($ch, CURLOPT_HTTPHEADER, [
             'Content-Type: '.env('API_CONTENT_TYPE'),
             'X-Auth-Token: '.Session('auth_token'),
@@ -30,6 +26,8 @@ class Base
         $response = curl_exec($ch);
 
         curl_close($ch);
+
+        return $response;
     }
 
     /**

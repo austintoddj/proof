@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Video;
+
 class HomeController extends Controller
 {
     /**
@@ -15,12 +17,18 @@ class HomeController extends Controller
     }
 
     /**
-     * Show the application dashboard.
+     * Show the application home page.
      *
-     * @return \Illuminate\Http\Response
+     * @return object $data
      */
     public function index()
     {
-        return view('pages.home');
+        $trendingVideosByViews = Video::getTrendingVideosByViews('/videos');
+        $trendingVideosByVotes = Video::getTrendingVideosByVotes('/videos');
+
+        return view('pages.home', [
+            'trendingVideosByViews' => $trendingVideosByViews,
+            'trendingVideosByVotes' => $trendingVideosByVotes,
+            ]);
     }
 }
