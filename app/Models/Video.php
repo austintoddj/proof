@@ -49,6 +49,7 @@ class Video extends Base
     public static function getTrendingVideosByViews($endpoint)
     {
         $data = parent::get($endpoint);
+
         $cachedContent = Cache::get('trendingVideosByViews');
 
         if ($cachedContent) {

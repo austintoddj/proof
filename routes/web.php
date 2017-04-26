@@ -22,6 +22,4 @@ Route::any('/register', 'HomeController@index');
 
 Route::resource('home', 'HomeController');
 Route::resource('videos', 'VideosController');
-
-Route::get('/submit', 'SubmitController@index')->name('submit');
-Route::post('/submit', 'SubmitController@post');
+Route::resource('submit', 'SubmitController');

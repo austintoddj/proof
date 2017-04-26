@@ -10,7 +10,7 @@
                     <div class="panel-heading">Submit</div>
 
                     <div class="panel-body">
-                        <form class="form-horizontal" role="form" method="POST" action="{{ route('submit') }}">
+                        <form class="form-horizontal" role="form" method="POST" action="{{ route('submit.store') }}">
                             {{ csrf_field() }}
 
                             <div class="form-group{{ $errors->has('link') ? ' has-error' : '' }}">

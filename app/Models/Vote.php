@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use App\Meta\Constants;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\Model;
@@ -31,11 +32,12 @@ class Vote extends Model
     {
         $voteLimit = Constants::VOTES;
         $voteCount = count(self::where('user_id', Auth::user()->id)->get());
-        $voteArray = self::where('user_id', Auth::user()->id)->get();
 
-        self::voteIsExpired($voteArray);
+        self::checkForExpiredVotes();
 
-        return $voteLimit - $voteCount;
+        $calcVotes = $voteLimit - $voteCount;
+
+        return $calcVotes < 1 ? 0 : $calcVotes;
     }
 
     /**
@@ -59,13 +61,10 @@ class Vote extends Model
      *
      * @return bool
      */
-    public static function voteIsExpired($voteArray)
+    public static function checkForExpiredVotes()
     {
-        foreach ($voteArray as $vote) {
-            $currentTimeStamp = time();
-            $voteTimeStamp = strtotime($vote->toArray()['created_at']);
-
-            dd($currentTimeStamp - $voteTimeStamp);
+        foreach (self::whereDate('created_at', '<', Carbon::now()->subDay())->get() as $vote) {
+            $vote->delete();
         }
     }
 }

@@ -31,8 +31,9 @@ class SubmitController extends Controller
      *
      * @param SubmitLinkRequest $request
      */
-    public function post(SubmitLinkRequest $request)
+    public function store(SubmitLinkRequest $request)
     {
+        // TODO: Submit a new link to the API
         dd($request);
     }
 }
