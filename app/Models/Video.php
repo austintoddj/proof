@@ -100,7 +100,7 @@ class Video extends Base
     {
         $body = [
             'opinion' => $opinion,
-            'video_id' => $videoId
+            'video_id' => $videoId,
         ];
 
         parent::post($endpoint, $body);
