@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Helpers\Slugify;
 use App\Models\Video;
-use App\Http\Requests\SubmitLinkRequest;
+use App\Helpers\Slugify;
 use Illuminate\Support\Facades\Artisan;
+use App\Http\Requests\SubmitLinkRequest;
 
 class SubmitController extends Controller
 {
