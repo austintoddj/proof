@@ -3,7 +3,7 @@
 namespace App\Helpers;
 
 /**
- * Video Url Parser
+ * Video Url Parser.
  *
  * Parses URLs from major cloud video providers. Capable of returning
  * keys from various video embed and link urls to manipulate and
@@ -21,11 +21,9 @@ class VideoUrlParser
     {
         if (preg_match('%youtube|youtu\.be%i', $url)) {
             return 'youtube';
-        }
-        elseif (preg_match('%vimeo%i', $url)) {
+        } elseif (preg_match('%vimeo%i', $url)) {
             return 'vimeo';
         }
-        return null;
     }
 
     /**
@@ -41,11 +39,9 @@ class VideoUrlParser
 
         if ($service == 'youtube') {
             return self::get_youtube_id($url);
-        }
-        elseif ($service == 'vimeo') {
+        } elseif ($service == 'vimeo') {
             return self::get_vimeo_id($url);
         }
-        return null;
     }
 
     /**
@@ -63,11 +59,9 @@ class VideoUrlParser
 
         if ($service == 'youtube') {
             return self::get_youtube_embed($id);
-        }
-        elseif ($service == 'vimeo') {
+        } elseif ($service == 'vimeo') {
             return self::get_vimeo_embed($id);
         }
-        return null;
     }
 
     /**
@@ -78,11 +72,13 @@ class VideoUrlParser
      */
     public static function get_youtube_id($url)
     {
-        $youtube_url_keys = array('v','vi');
+        $youtube_url_keys = ['v', 'vi'];
 
         // Try to get ID from url parameters
         $key_from_params = self::parse_url_for_params($url, $youtube_url_keys);
-        if ($key_from_params) return $key_from_params;
+        if ($key_from_params) {
+            return $key_from_params;
+        }
 
         // Try to get ID from last portion of url
         return self::parse_url_for_last_element($url);
@@ -129,7 +125,6 @@ class VideoUrlParser
     /**
      * Find the first matching parameter value in a url from the passed params array.
      *
-     * @access private
      *
      * @param string $url The url
      * @param array $target_params Any parameter keys that may contain the id
@@ -137,26 +132,24 @@ class VideoUrlParser
      */
     private static function parse_url_for_params($url, $target_params)
     {
-        parse_str( parse_url( $url, PHP_URL_QUERY ), $my_array_of_params );
+        parse_str(parse_url($url, PHP_URL_QUERY), $my_array_of_params);
         foreach ($target_params as $target) {
-            if (array_key_exists ($target, $my_array_of_params)) {
+            if (array_key_exists($target, $my_array_of_params)) {
                 return $my_array_of_params[$target];
             }
         }
-        return null;
     }
 
     /**
-     * Find the last element in a url, without any trailing parameters
+     * Find the last element in a url, without any trailing parameters.
      *
-     * @access private
      *
      * @param string $url The url
      * @return string The last element of the url
      */
     private static function parse_url_for_last_element($url)
     {
-        $url_parts = explode("/", $url);
+        $url_parts = explode('/', $url);
         $prospect = end($url_parts);
         $prospect_and_params = preg_split("/(\?|\=|\&)/", $prospect);
         if ($prospect_and_params) {
@@ -164,6 +157,7 @@ class VideoUrlParser
         } else {
             return $prospect;
         }
+
         return $url;
     }
 }
