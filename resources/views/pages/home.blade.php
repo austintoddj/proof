@@ -14,7 +14,9 @@
                         <h3>Top 10 by Views</h3>
                         <hr>
                         @foreach($trendingVideosByViews as $video)
-                            <p><a href="{{ $video->attributes->url }}" target="_blank"> {{ $video->attributes->title }}</a> <span class="text-muted small"><i class="fa fa-fw fa-eye"></i> {{ $video->attributes->view_tally }}&nbsp;&nbsp;<i class="fa fa-fw fa-check"></i> {{ $video->attributes->vote_tally }}</span></p>
+                            <iframe src="{{ \App\Helpers\VideoUrlParser::get_url_embed($video->attributes->url) }}" frameborder="0" allowfullscreen style="width: 100%; height: 225px"></iframe>
+                            <p><a href="{{ $video->attributes->url }}" target="_blank"> {{ $video->attributes->title }}</a> <span class="text-muted small pull-right"><i class="fa fa-fw fa-eye"></i> {{ $video->attributes->view_tally }}&nbsp;&nbsp;<i class="fa fa-fw fa-check"></i> {{ $video->attributes->vote_tally }}</span></p>
+
                             <form role="form" method="POST" action="{{ route('videos.store') }}">
                                 {{ csrf_field() }}
                                 <input type="hidden" name="_videoId" value="{{ $video->id }}">
@@ -30,7 +32,9 @@
                         <h3>Top 10 by Votes</h3>
                         <hr>
                         @foreach($trendingVideosByVotes as $video)
-                            <p><a href="{{ $video->attributes->url }}" target="_blank"> {{ $video->attributes->title }}</a> <span class="text-muted small"><i class="fa fa-fw fa-eye"></i> {{ $video->attributes->view_tally }}&nbsp;&nbsp;<i class="fa fa-fw fa-check"></i> {{ $video->attributes->vote_tally }}</span></p>
+                            <iframe src="{{ \App\Helpers\VideoUrlParser::get_url_embed($video->attributes->url) }}" frameborder="0" allowfullscreen style="width: 100%; height: 225px"></iframe>
+                            <p><a href="{{ $video->attributes->url }}" target="_blank"> {{ $video->attributes->title }}</a> <span class="text-muted small pull-right"><i class="fa fa-fw fa-eye"></i> {{ $video->attributes->view_tally }}&nbsp;&nbsp;<i class="fa fa-fw fa-check"></i> {{ $video->attributes->vote_tally }}</span></p>
+
                             <form role="form" method="POST" action="{{ route('videos.store') }}">
                                 {{ csrf_field() }}
                                 <input type="hidden" name="_videoId" value="{{ $video->id }}">
