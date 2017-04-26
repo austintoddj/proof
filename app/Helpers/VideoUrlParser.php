@@ -8,6 +8,9 @@ namespace App\Helpers;
  * Parses URLs from major cloud video providers. Capable of returning
  * keys from various video embed and link urls to manipulate and
  * access videos in various ways.
+ *
+ * Author: Alex Stockwell
+ * Source: https://gist.github.com/astockwell/11055104
  */
 class VideoUrlParser
 {
