@@ -29,7 +29,13 @@ class VideosController extends Controller
     {
         $data = Video::getAllVideos('/videos');
 
-        return view('pages.videos', ['data' => json_decode($data)]);
+        $videos = json_decode($data)->data;
+
+        usort($videos, function ($a, $b) {
+            return $a->attributes->created_at - $b->attributes->created_at;
+        });
+
+        return view('pages.videos', ['data' => array_reverse($videos)]);
     }
 
     /**
