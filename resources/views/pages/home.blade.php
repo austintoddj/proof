@@ -18,6 +18,8 @@
                             <form role="form" method="POST" action="{{ route('home.store') }}">
                                 {{ csrf_field() }}
                                 <input type="hidden" name="_videoId" value="{{ $video->id }}">
+                                <input type="hidden" name="_userId" value="{{ Auth::user()->id }}">
+                                <input type="hidden" name="_userIp" value="{{ $_SERVER['REMOTE_ADDR'] }}">
                                 <button class="btn btn-default btn-xs" type="submit" name="_opinion" value="1" @if(\App\Models\Vote::votesLeft() == 0) disabled @endif><i class="fa fa-fw fa-thumbs-up"></i> Upvote</button>
                                 <button class="btn btn-default btn-xs" type="submit" name="_opinion" value="-1" @if(\App\Models\Vote::votesLeft() == 0) disabled @endif><i class="fa fa-fw fa-thumbs-down"></i> Downvote</button>
                             </form>
@@ -32,6 +34,8 @@
                             <form role="form" method="POST" action="{{ route('home.store') }}">
                                 {{ csrf_field() }}
                                 <input type="hidden" name="_videoId" value="{{ $video->id }}">
+                                <input type="hidden" name="_userId" value="{{ Auth::user()->id }}">
+                                <input type="hidden" name="_userIp" value="{{ $_SERVER['REMOTE_ADDR'] }}">
                                 <button class="btn btn-default btn-xs" type="submit" name="_opinion" value="1" @if(\App\Models\Vote::votesLeft() == 0) disabled @endif><i class="fa fa-fw fa-thumbs-up"></i> Upvote</button>
                                 <button class="btn btn-default btn-xs" type="submit" name="_opinion" value="-1" @if(\App\Models\Vote::votesLeft() == 0) disabled @endif><i class="fa fa-fw fa-thumbs-down"></i> Downvote</button>
                             </form>

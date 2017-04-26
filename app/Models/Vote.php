@@ -16,24 +16,11 @@ class Vote extends Model
     protected $table = 'votes';
 
     /**
-     * Find any voting records that exist in the votes table for the authenticated user.
+     * The attributes that are mass assignable.
      *
-     * @return int
+     * @var array
      */
-    public static function getVoteRecord()
-    {
-        return count(self::where('user_id', Auth::user()->id)->get());
-    }
-
-    /**
-     * Return true if the user has already voted today.
-     *
-     * @return bool
-     */
-    public static function alreadyVoted()
-    {
-        return self::getVoteRecord() == Constants::VOTES ? true : false;
-    }
+    protected $fillable = ['user_id, user_ip'];
 
     /**
      * Return the number of votes left that the user has today.
@@ -42,9 +29,44 @@ class Vote extends Model
      */
     public static function votesLeft()
     {
-        $voteLimit = Constants::VOTES;
-        $votes = count(self::where('user_id', Auth::user()->id)->get());
 
-        return $voteLimit - $votes;
+        $voteLimit = Constants::VOTES;
+        $voteCount = count(self::where('user_id', Auth::user()->id)->get());
+        $voteArray = self::where('user_id', Auth::user()->id)->get();
+
+        self::voteIsExpired($voteArray);
+
+        return $voteLimit - $voteCount;
+    }
+
+    /**
+     * Save a vote record to the database.
+     *
+     * @param int $userId
+     * @param int $userIp
+     *
+     * @return bool
+     */
+    public static function userVoted($userId, $userIp)
+    {
+        $vote = new self();
+        $vote->user_id = $userId;
+        $vote->user_ip = $userIp;
+        $vote->save();
+    }
+
+    /**
+     * If a vote was created >= 24 hours ago, delete the record.
+     *
+     * @return bool
+     */
+    public static function voteIsExpired($voteArray)
+    {
+        foreach ($voteArray as $vote) {
+            $currentTimeStamp = time();
+            $voteTimeStamp = strtotime($vote->toArray()['created_at']);
+
+            dd($currentTimeStamp - $voteTimeStamp);
+        }
     }
 }
