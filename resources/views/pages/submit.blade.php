@@ -13,6 +13,19 @@
                         <form class="form-horizontal" role="form" method="POST" action="{{ route('submit.store') }}">
                             {{ csrf_field() }}
 
+                            <div class="form-group{{ $errors->has('title') ? ' has-error' : '' }}">
+                                <label for="title" class="col-md-4 control-label">Title</label>
+
+                                <div class="col-md-6">
+                                    <input id="title" type="text" class="form-control" name="title" value="{{ old('title') }}" required @if(\App\Helpers\Allowable::weekend(date('l'))) placeholder="Unavailable on weekends" disabled @endif>
+                                    @if ($errors->has('title'))
+                                        <span class="help-block">
+                                        <strong>{{ $errors->first('title') }}</strong>
+                                    </span>
+                                    @endif
+                                </div>
+                            </div>
+
                             <div class="form-group{{ $errors->has('link') ? ' has-error' : '' }}">
                                 <label for="link" class="col-md-4 control-label">Video URL</label>
 

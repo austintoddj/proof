@@ -29,6 +29,7 @@ class SubmitLinkRequest extends FormRequest
                 'url',
                 'not_in:'.implode(',', Video::getAllVideoUrls('/videos')),
             ],
+            'title' => 'required',
         ];
     }
 

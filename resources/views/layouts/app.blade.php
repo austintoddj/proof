@@ -55,7 +55,7 @@
                         @if (!Auth::guest())
                             <li @if (Route::is('home.index')) class="active" @endif><a href="{{ route('home.index') }}"><i class="fa fa-fw fa-home"></i> Home</a></li>
                             <li @if (Route::is('videos.index')) class="active" @endif><a href="{{ route('videos.index') }}"><i class="fa fa-fw fa-youtube-play"></i> Videos</a></li>
-                            <li @if (Route::is('submit')) class="active" @endif><a href="{{ route('submit.index') }}"><i class="fa fa-fw fa-paper-plane"></i> Submit</a></li>
+                            <li @if (Route::is('submit.index')) class="active" @endif><a href="{{ route('submit.index') }}"><i class="fa fa-fw fa-paper-plane"></i> Submit</a></li>
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                                     <i class="fa fa-fw fa-user-circle"></i> {{ Auth::user()->name }} <span class="caret"></span>

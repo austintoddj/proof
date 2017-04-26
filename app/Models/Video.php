@@ -94,14 +94,31 @@ class Video extends Base
      * @param string $endpoint
      * @param int $videoId
      * @param int $opinion
-     *
-     * @return object $data
      */
     public static function voteOnVideo($endpoint, $videoId, $opinion)
     {
         $body = [
             'opinion' => $opinion,
             'video_id' => $videoId,
+        ];
+
+        parent::post($endpoint, $body);
+    }
+
+    /**
+     * Submit a new video to the API.
+     *
+     * @param string $endpoint
+     * @param string $title
+     * @param string $slug
+     * @param string $url
+     */
+    public static function submitVideoLink($endpoint, $title, $slug, $url)
+    {
+        $body = [
+            'title' => $title,
+            'url' => $url,
+            'slug' => $slug,
         ];
 
         parent::post($endpoint, $body);
