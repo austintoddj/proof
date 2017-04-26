@@ -15,5 +15,5 @@ class Constants
     /**
      * @constant(VOTES)
      */
-    const VOTES = 15;
+    const VOTES = 1;
 }

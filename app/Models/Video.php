@@ -50,14 +50,19 @@ class Video extends Base
     {
         $data = parent::get($endpoint);
 
+        $videos = json_decode($data)->data;
+
+        usort($videos, function ($a, $b) {
+            return $a->attributes->view_tally - $b->attributes->view_tally;
+        });
+
         $cachedContent = Cache::get('trendingVideosByViews');
 
         if ($cachedContent) {
             return $cachedContent;
         } else {
-            $newCache = Cache::remember('trendingVideosByViews', 5, function () use (&$data) {
-                // TODO: Cache ONLY the top 10 videos by views (Currently caching everything)
-                return json_decode($data)->data;
+            $newCache = Cache::remember('trendingVideosByViews', 5, function () use (&$data, &$videos) {
+                return array_reverse($videos);
             });
 
             return $newCache;
@@ -74,14 +79,20 @@ class Video extends Base
     public static function getTrendingVideosByVotes($endpoint)
     {
         $data = parent::get($endpoint);
+
+        $videos = json_decode($data)->data;
+
+        usort($videos, function ($a, $b) {
+            return $a->attributes->vote_tally - $b->attributes->vote_tally;
+        });
+
         $cachedContent = Cache::get('trendingVideosByVotes');
 
         if ($cachedContent) {
             return $cachedContent;
         } else {
-            $newCache = Cache::remember('trendingVideosByVotes', 5, function () use (&$data) {
-                // TODO: Cache ONLY the top 10 videos by votes (Currently caching everything)
-                return json_decode($data)->data;
+            $newCache = Cache::remember('trendingVideosByVotes', 5, function () use (&$data, &$videos) {
+                return array_reverse($videos);
             });
 
             return $newCache;
