@@ -49,14 +49,20 @@ class Video extends Base
     public static function getTrendingVideosByViews($endpoint)
     {
         $data = parent::get($endpoint);
+
+        $videos = json_decode($data)->data;
+
+        usort($videos, function ($a, $b) {
+            return $a->attributes->view_tally - $b->attributes->view_tally;
+        });
+
         $cachedContent = Cache::get('trendingVideosByViews');
 
         if ($cachedContent) {
             return $cachedContent;
         } else {
-            $newCache = Cache::remember('trendingVideosByViews', 5, function () use (&$data) {
-                // TODO: Cache ONLY the top 10 videos by views (Currently caching everything)
-                return json_decode($data)->data;
+            $newCache = Cache::remember('trendingVideosByViews', 5, function () use (&$data, &$videos) {
+                return array_reverse($videos);
             });
 
             return $newCache;
@@ -73,17 +79,59 @@ class Video extends Base
     public static function getTrendingVideosByVotes($endpoint)
     {
         $data = parent::get($endpoint);
+
+        $videos = json_decode($data)->data;
+
+        usort($videos, function ($a, $b) {
+            return $a->attributes->vote_tally - $b->attributes->vote_tally;
+        });
+
         $cachedContent = Cache::get('trendingVideosByVotes');
 
         if ($cachedContent) {
             return $cachedContent;
         } else {
-            $newCache = Cache::remember('trendingVideosByVotes', 5, function () use (&$data) {
-                // TODO: Cache ONLY the top 10 videos by votes (Currently caching everything)
-                return json_decode($data)->data;
+            $newCache = Cache::remember('trendingVideosByVotes', 5, function () use (&$data, &$videos) {
+                return array_reverse($videos);
             });
 
             return $newCache;
         }
+    }
+
+    /**
+     * Submit a vote to the API for a video.
+     *
+     * @param string $endpoint
+     * @param int $videoId
+     * @param int $opinion
+     */
+    public static function voteOnVideo($endpoint, $videoId, $opinion)
+    {
+        $body = [
+            'opinion' => $opinion,
+            'video_id' => $videoId,
+        ];
+
+        parent::post($endpoint, $body);
+    }
+
+    /**
+     * Submit a new video to the API.
+     *
+     * @param string $endpoint
+     * @param string $title
+     * @param string $slug
+     * @param string $url
+     */
+    public static function submitVideoLink($endpoint, $title, $slug, $url)
+    {
+        $body = [
+            'title' => $title,
+            'url' => $url,
+            'slug' => $slug,
+        ];
+
+        parent::post($endpoint, $body);
     }
 }

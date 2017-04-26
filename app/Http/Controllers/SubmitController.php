@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Video;
+use App\Helpers\Slugify;
+use Illuminate\Support\Facades\Artisan;
 use App\Http\Requests\SubmitLinkRequest;
 
 class SubmitController extends Controller
@@ -14,6 +17,7 @@ class SubmitController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+        $this->middleware('verifyToken');
     }
 
     /**
@@ -30,9 +34,18 @@ class SubmitController extends Controller
      * Submit a valid URL to the API.
      *
      * @param SubmitLinkRequest $request
+     *
+     * @return mixed
      */
-    public function post(SubmitLinkRequest $request)
+    public function store(SubmitLinkRequest $request)
     {
-        dd($request);
+        $title = $request->get('title');
+        $slug = Slugify::generateSlug($request->get('title'));
+        $url = $request->get('link');
+
+        Video::submitVideoLink('/videos', $title, $slug, $url);
+        Artisan::call('cache:clear');
+
+        return redirect('videos');
     }
 }

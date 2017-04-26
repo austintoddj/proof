@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use App\Meta\Constants;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\Model;
@@ -16,24 +17,11 @@ class Vote extends Model
     protected $table = 'votes';
 
     /**
-     * Find any voting records that exist in the votes table for the authenticated user.
+     * The attributes that are mass assignable.
      *
-     * @return int
+     * @var array
      */
-    public static function getVoteRecord()
-    {
-        return count(self::where('user_id', Auth::user()->id)->get());
-    }
-
-    /**
-     * Return true if the user has already voted today.
-     *
-     * @return bool
-     */
-    public static function alreadyVoted()
-    {
-        return self::getVoteRecord() == Constants::VOTES ? true : false;
-    }
+    protected $fillable = ['user_id, user_ip'];
 
     /**
      * Return the number of votes left that the user has today.
@@ -42,9 +30,38 @@ class Vote extends Model
      */
     public static function votesLeft()
     {
+        self::checkForExpiredVotes();
         $voteLimit = Constants::VOTES;
-        $votes = count(self::where('user_id', Auth::user()->id)->get());
+        $voteCount = count(self::where('user_id', Auth::user()->id)->get());
 
-        return $voteLimit - $votes;
+        $calcVotes = $voteLimit - $voteCount;
+
+        return $calcVotes < 1 ? 0 : $calcVotes;
+    }
+
+    /**
+     * Save a vote record to the database.
+     *
+     * @param int $userId
+     * @param int $userIp
+     *
+     * @return bool
+     */
+    public static function userVoted($userId, $userIp)
+    {
+        $vote = new self();
+        $vote->user_id = $userId;
+        $vote->user_ip = $userIp;
+        $vote->save();
+    }
+
+    /**
+     * If a vote was created >= 24 hours ago, delete the record.
+     *
+     * @return bool
+     */
+    public static function checkForExpiredVotes()
+    {
+        self::whereDate('created_at', '<', Carbon::now()->subDay())->delete();
     }
 }

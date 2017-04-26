@@ -3,9 +3,10 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use App\Models\Base;
 use App\Helpers\Auth;
 
-class GenerateApiAuthToken
+class VerifyApiAuthToken
 {
     /**
      * Handle an incoming request.
@@ -16,11 +17,11 @@ class GenerateApiAuthToken
      */
     public function handle($request, Closure $next)
     {
-        if (! empty(Session('auth_token')) || env('APP_ENV') === 'testing') {
-            return $next($request);
-        } else {
+        if (Base::post('/sessions', []) === '{"errors":[{"status":"401","title":"Unauthorized request","detail":"The authentication token provided was invalid or not found"}]}') {
             Auth::generateToken();
 
+            return $next($request);
+        } else {
             return $next($request);
         }
     }

@@ -20,7 +20,6 @@ Auth::routes();
 // Re-route registration requests to the home page
 Route::any('/register', 'HomeController@index');
 
-Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/videos', 'VideosController@index')->name('videos');
-Route::get('/submit', 'SubmitController@index')->name('submit');
-Route::post('/submit', 'SubmitController@post');
+Route::resource('home', 'HomeController');
+Route::resource('videos', 'VideosController');
+Route::resource('submit', 'SubmitController');
