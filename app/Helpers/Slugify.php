@@ -2,7 +2,6 @@
 
 namespace App\Helpers;
 
-
 class Slugify
 {
     public static function generateSlug($string)
