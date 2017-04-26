@@ -29,7 +29,6 @@ class Vote extends Model
      */
     public static function votesLeft()
     {
-
         $voteLimit = Constants::VOTES;
         $voteCount = count(self::where('user_id', Auth::user()->id)->get());
         $voteArray = self::where('user_id', Auth::user()->id)->get();
