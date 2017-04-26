@@ -36,7 +36,7 @@
                     </button>
 
                     <!-- Branding Image -->
-                    <a class="navbar-brand" @if (Auth::check()) href="{{ route('home') }}" @else href="{{ url('/') }}" @endif>
+                    <a class="navbar-brand" @if (Auth::check()) href="{{ route('home.index') }}" @else href="{{ url('/') }}" @endif>
                         {{ config('app.name') }}
                     </a>
                 </div>
@@ -53,8 +53,8 @@
                     <ul class="nav navbar-nav navbar-right">
                         <!-- Authentication Links -->
                         @if (!Auth::guest())
-                            <li @if (Route::is('home')) class="active" @endif><a href="{{ route('home') }}"><i class="fa fa-fw fa-home"></i> Home</a></li>
-                            <li @if (Route::is('videos')) class="active" @endif><a href="{{ route('videos') }}"><i class="fa fa-fw fa-youtube-play"></i> Videos</a></li>
+                            <li @if (Route::is('home.index')) class="active" @endif><a href="{{ route('home.index') }}"><i class="fa fa-fw fa-home"></i> Home</a></li>
+                            <li @if (Route::is('videos.index')) class="active" @endif><a href="{{ route('videos.index') }}"><i class="fa fa-fw fa-youtube-play"></i> Videos</a></li>
                             <li @if (Route::is('submit')) class="active" @endif><a href="{{ route('submit') }}"><i class="fa fa-fw fa-paper-plane"></i> Submit</a></li>
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">

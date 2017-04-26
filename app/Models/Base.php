@@ -2,10 +2,12 @@
 
 namespace App\Models;
 
+use Illuminate\Support\Facades\Input;
+
 class Base
 {
     /**
-     * Call a GET request on the API.
+     * Make a GET request to the API.
      *
      * @param string $endpoint
      *
@@ -33,9 +35,31 @@ class Base
     /**
      * Make a POST request to the API.
      *
-     * @return void
+     * @param string $endpoint
+     * @param string $body
+     *
+     * @return object $response
      */
-    public function post()
+    public static function post($endpoint, $body)
     {
+        $ch = curl_init();
+
+        curl_setopt($ch, CURLOPT_URL, env('API_BASE_URL').$endpoint);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
+        curl_setopt($ch, CURLOPT_HEADER, FALSE);
+        curl_setopt($ch, CURLOPT_POST, TRUE);
+
+        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($body));
+
+        curl_setopt($ch, CURLOPT_HTTPHEADER, [
+            'Content-Type: '.env('API_CONTENT_TYPE'),
+            'X-Auth-Token: '.Session('auth_token'),
+        ]);
+
+        $response = curl_exec($ch);
+
+        curl_close($ch);
+
+        return $response;
     }
 }

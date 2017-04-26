@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Video;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Artisan;
 
 class HomeController extends Controller
 {
@@ -30,5 +32,23 @@ class HomeController extends Controller
             'trendingVideosByViews' => $trendingVideosByViews,
             'trendingVideosByVotes' => $trendingVideosByVotes,
             ]);
+    }
+
+    /**
+     * Vote on a video resource.
+     *
+     * @param Request $request
+     *
+     * @return object $data
+     */
+    public function store(Request $request)
+    {
+        $videoId = $request->get('_videoId');
+        $opinion = $request->get('_opinion');
+
+        Video::voteOnVideo('/votes', $videoId, $opinion);
+        Artisan::call('cache:clear');
+
+        return back();
     }
 }

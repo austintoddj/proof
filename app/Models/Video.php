@@ -86,4 +86,23 @@ class Video extends Base
             return $newCache;
         }
     }
+
+    /**
+     * Submit a vote to the API for a video.
+     *
+     * @param string $endpoint
+     * @param int $videoId
+     * @param int $opinion
+     *
+     * @return object $data
+     */
+    public static function voteOnVideo($endpoint, $videoId, $opinion)
+    {
+        $body = [
+            'opinion' => $opinion,
+            'video_id' => $videoId
+        ];
+
+        parent::post($endpoint, $body);
+    }
 }
