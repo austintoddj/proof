@@ -95,7 +95,7 @@ class VideoUrlParser
      */
     public static function get_youtube_embed($youtube_video_id, $autoplay = 0)
     {
-        $embed = "http://youtube.com/embed/$youtube_video_id?autoplay=$autoplay";
+        $embed = "https://youtube.com/embed/$youtube_video_id?autoplay=$autoplay";
 
         return $embed;
     }
@@ -120,7 +120,7 @@ class VideoUrlParser
      */
     public static function get_vimeo_embed($vimeo_video_id, $autoplay = 0)
     {
-        $embed = "http://player.vimeo.com/video/$vimeo_video_id?byline=0&amp;portrait=0&amp;autoplay=$autoplay";
+        $embed = "https://player.vimeo.com/video/$vimeo_video_id?byline=0&amp;portrait=0&amp;autoplay=$autoplay";
 
         return $embed;
     }
