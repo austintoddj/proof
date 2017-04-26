@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Vote;
 use App\Models\Video;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Artisan;
 
 class VideosController extends Controller
 {
@@ -39,9 +41,15 @@ class VideosController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request->all());
-        $videoId = $request->get('videoId');
+        $videoId = $request->get('_videoId');
+        $opinion = $request->get('_opinion');
+        $userId = $request->get('_userId');
+        $userIp = $request->get('_userIp');
 
-        return Video::voteOnVideo('/videos/'.$videoId.'/votes');
+        Video::voteOnVideo('/votes', $videoId, $opinion);
+        Artisan::call('cache:clear');
+        Vote::userVoted($userId, $userIp);
+
+        return back();
     }
 }

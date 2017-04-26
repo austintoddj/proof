@@ -30,10 +30,9 @@ class Vote extends Model
      */
     public static function votesLeft()
     {
+        self::checkForExpiredVotes();
         $voteLimit = Constants::VOTES;
         $voteCount = count(self::where('user_id', Auth::user()->id)->get());
-
-        self::checkForExpiredVotes();
 
         $calcVotes = $voteLimit - $voteCount;
 
@@ -63,8 +62,6 @@ class Vote extends Model
      */
     public static function checkForExpiredVotes()
     {
-        foreach (self::whereDate('created_at', '<', Carbon::now()->subDay())->get() as $vote) {
-            $vote->delete();
-        }
+        self::whereDate('created_at', '<', Carbon::now()->subDay())->delete();
     }
 }

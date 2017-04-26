@@ -15,7 +15,7 @@
                         <hr>
                         @foreach($trendingVideosByViews as $video)
                             <p><a href="{{ $video->attributes->url }}" target="_blank"> {{ $video->attributes->title }}</a> <span class="text-muted small"><i class="fa fa-fw fa-eye"></i> {{ $video->attributes->view_tally }}&nbsp;&nbsp;<i class="fa fa-fw fa-check"></i> {{ $video->attributes->vote_tally }}</span></p>
-                            <form role="form" method="POST" action="{{ route('home.store') }}">
+                            <form role="form" method="POST" action="{{ route('videos.store') }}">
                                 {{ csrf_field() }}
                                 <input type="hidden" name="_videoId" value="{{ $video->id }}">
                                 <input type="hidden" name="_userId" value="{{ Auth::user()->id }}">
@@ -31,7 +31,7 @@
                         <hr>
                         @foreach($trendingVideosByVotes as $video)
                             <p><a href="{{ $video->attributes->url }}" target="_blank"> {{ $video->attributes->title }}</a> <span class="text-muted small"><i class="fa fa-fw fa-eye"></i> {{ $video->attributes->view_tally }}&nbsp;&nbsp;<i class="fa fa-fw fa-check"></i> {{ $video->attributes->vote_tally }}</span></p>
-                            <form role="form" method="POST" action="{{ route('home.store') }}">
+                            <form role="form" method="POST" action="{{ route('videos.store') }}">
                                 {{ csrf_field() }}
                                 <input type="hidden" name="_videoId" value="{{ $video->id }}">
                                 <input type="hidden" name="_userId" value="{{ Auth::user()->id }}">
