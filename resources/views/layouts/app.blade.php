@@ -45,7 +45,7 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="nav navbar-nav">
                         @if (!Auth::guest())
-                        &nbsp;  <li><a><span class="label label-default"><i class="fa fa-fw fa-check"></i> Votes left: {{ \App\Models\Vote::votesLeft() }}</span></a></li>
+                        &nbsp;  <li><a><span class="label label-default"><i class="fa fa-fw fa-check"></i> Votes left: {{ $data['votesLeft'] }}</span></a></li>
                         @endif
                     </ul>
 
