@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Vote;
 use App\Models\Video;
 use App\Helpers\Slugify;
 use Illuminate\Support\Facades\Artisan;
@@ -27,7 +28,11 @@ class SubmitController extends Controller
      */
     public function index()
     {
-        return view('pages.submit');
+        $data = [
+            'votesLeft' => Vote::votesLeft(),
+        ];
+
+        return view('pages.submit', compact('data'));
     }
 
     /**

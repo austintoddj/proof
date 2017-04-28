@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Vote;
 use App\Models\Video;
 
 class HomeController extends Controller
@@ -24,12 +25,12 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $trendingVideosByViews = Video::getTrendingVideosByViews('/videos');
-        $trendingVideosByVotes = Video::getTrendingVideosByVotes('/videos');
+        $data = [
+            'votesLeft' => Vote::votesLeft(),
+            'trendingVideosByViews' => Video::getTrendingVideosByViews('/videos'),
+            'trendingVideosByVotes' => Video::getTrendingVideosByVotes('/videos'),
+        ];
 
-        return view('pages.home', [
-            'trendingVideosByViews' => $trendingVideosByViews,
-            'trendingVideosByVotes' => $trendingVideosByVotes,
-            ]);
+        return view('pages.home', compact('data'));
     }
 }

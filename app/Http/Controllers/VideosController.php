@@ -27,15 +27,20 @@ class VideosController extends Controller
      */
     public function index()
     {
-        $data = Video::getAllVideos('/videos');
+        $allVideos = Video::getAllVideos('/videos');
 
-        $videos = json_decode($data)->data;
+        $videos = json_decode($allVideos)->data;
 
         usort($videos, function ($a, $b) {
             return $a->attributes->created_at - $b->attributes->created_at;
         });
 
-        return view('pages.videos', ['data' => array_reverse($videos)]);
+        $data = [
+            'videosArray' => array_reverse($videos),
+            'votesLeft' => Vote::votesLeft(),
+        ];
+
+        return view('pages.videos', compact('data'));
     }
 
     /**
